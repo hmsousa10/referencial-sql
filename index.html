@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referencial de SQL para Access - Hugo Sousa</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        nav {
+            position: fixed;
+            top: 120px;
+            left: 0;
+            padding: 10px;
+            width: 200px;
+        }
+        nav a {
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        p {
+            text-align: justify;
+        }
+
+        
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="#introducao">Introdução</a>
+        <a href="#comandos-basicos">Comandos Básicos</a>
+        <a href="#tipos-de-dados">Tipos-de-Dados</a>
+        <a href="#tabelas">Tabelas</a>
+        <a href="#indices">Índices</a>
+        <a href="#views">Views</a>
+        <a href="#joins">Joins</a>
+        <a href="#conclusao">Conclusão</a>
+
+    </nav>
+    <h1>Referencial Rápido de SQL para Access</h1>
+</header>
+
+<main>
+       <section id="introducao">
+        <h2><strong>Introdução ao SQL no Access</strong></h2>
+        <p>Este documento destina-se a ser um referencial rápido para consulta de comandos de SQL, focado no uso com Microsoft Access. Abrange desde conceitos básicos até comandos mais avançados, como Índices e Views, e detalha a sintaxe e exemplos práticos de cada comando.</p>
+        <p>O objetivo é fornecer uma ferramenta pedagógica útil que facilite a programação em SQL, relembrando a matéria do ano anterior e permitindo uma consulta rápida de comandos e suas utilizações.</p>
+        <p>Além disso, uma atenção especial é dada aos Joins, uma vez que foram abordados de forma introdutória no ano anterior, mas são essenciais para a manipulação eficiente de bases de dados relacionais.</p>
+    </section>
+    <section id="tipos-de-dados">
+        <h2>Tipos de Dados em SQL para Access</h2>
+        <p>O SQL no Access suporta diversos tipos de dados, cada um adequado para armazenar diferentes tipos de informação. A escolha correta do tipo de dado é crucial para o bom desempenho e precisão nas consultas e manipulação de dados.</p>
+        <h3>Númericos</h3>
+        <h2>Tipos de Dados Numéricos</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th scope="col">Tipo de Dado</th>
+                    <th scope="col">Significado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Byte</td>
+                    <td>Número inteiro de 0 a 255.</td>
+                </tr>
+                <tr>
+                    <td>Integer</td>
+                    <td>Número inteiro de -32,768 a 32,767.</td>
+                </tr>
+                <tr>
+                    <td>Long</td>
+                    <td>Número inteiro de -2,147,483,648 a 2,147,483,647.</td>
+                </tr>
+                <tr>
+                    <td>Single</td>
+                    <td>Número de ponto flutuante para valores com precisão simples.</td>
+                </tr>
+                <tr>
+                    <td>Double</td>
+                    <td>Número de ponto flutuante para valores com precisão dupla.</td>
+                </tr>
+                <tr>
+                    <td>Decimal</td>
+                    <td>Numérico com precisão fixa e escala (até 28 dígitos).</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Exemplo:</p>
+        <pre><code class="language-sql">CREATE TABLE Numeros (
+    Id AUTOINCREMENT,
+    Contagem Byte,
+    Salario Integer,
+    Populacao Long,
+    Temperatura Single,
+    Distancia Double,
+    Precisao Decimal
+);</code></pre>
+        <h3>Data e Hora</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th scope="col">Tipo de Dado</th>
+                    <th scope="col">Significado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Date/Time</td>
+                    <td>Para armazenar datas e horas.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Exemplo:</p>
+        <pre><code class="language-sql">CREATE TABLE Eventos (
+    EventoID AUTOINCREMENT,
+    NomeEvento Text(255),
+    DataEvento Date/Time
+);</code></pre>
+        <h3>Texto</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th scope="col">Tipo de Dado</th>
+                    <th scope="col">Significado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Text</strong></td>
+                    <td>Para strings de texto de até 255 caracteres.</td>
+                </tr>
+                <tr>
+                    <td><strong>Long Text</strong></td>
+                    <td>Para texto extenso, até cerca de 1 GB.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Exemplo:</p>
+        <pre><code class="language-sql">CREATE TABLE Pessoas (
+PessoaID AUTOINCREMENT,
+Nome Text(255),
+Biografia Long Text
+);</code></pre>
+    
+        <h3>Outros Tipos Comuns</h3>
+        <table border="1">
+            <table>
+        <tr>
+            <th scope="col">Tipo de Dado</th>
+            <th scope="col">Significado</th>
+        </tr>
+    <tr>
+        <td><strong>Yes/No</strong></td>
+        <td>Armazena valores booleanos, verdadeiro ou falso.</td>
+    </tr>
+    <tr>
+        <td><strong>Currency</strong></td>
+        <td>Para valores monetários.</td>
+    </tr>
+    <tr>
+        <td><strong>OLE Object</strong></td>
+        <td>Para armazenar objetos OLE, como documentos do Word ou planilhas do Excel.</td>
+    </tr>
+    <tr>
+        <td><strong>Hyperlink</strong></td>
+        <td>Para armazenar hiperlinks.</td>
+    </tr>
+    <tr>
+        <td><strong>Attachment</strong></td>
+        <td>Tipo específico do Access para armazenar arquivos e documentos.</td>
+    </tr>
+</table>
+
+        <p>Exemplo:</p>
+        <pre><code class="language-sql">CREATE TABLE Detalhes (
+ID AUTOINCREMENT,
+EstaAtivo Yes/No,
+Preco Currency,
+Documento OLE Object,
+Website Hyperlink,
+Anexo Attachment
+);</code></pre>
+    </section>  
+    <section id="comandos-basicos">
+        <h2>Comandos Básicos</h2>
+        <p><strong>SELECT</strong>: Utilizado para selecionar dados de uma ou mais tabelas.</p>
+        <pre><code class="language-sql">SELECT * FROM Tabela;</code></pre>
+        <p><strong>INSERT INTO</strong>: Insere dados em uma tabela.</p>
+        <pre><code class="language-sql">INSERT INTO Tabela (Coluna1, Coluna2) VALUES (Valor1, Valor2);</code></pre>
+        <p><strong>UPDATE</strong>: Atualiza dados em uma tabela.</p>
+        <pre><code class="language-sql">UPDATE Tabela SET Coluna1 = Valor1 WHERE Condição;</code></pre>
+        <p><strong>DELETE</strong>: Remove dados de uma tabela.</p>
+        <pre><code class="language-sql">DELETE FROM Tabela WHERE Condição;</code></pre>
+    </section>
+
+    <section id="tabelas">
+        <h2>Tabelas</h2>
+        <p>Trabalhar com tabelas é fundamental em SQL, visto que elas armazenam os dados que manipulamos. Abaixo, explicamos como criar, modificar e eliminar tabelas no Access.</p>
+        <h3>Criação de Tabelas</h3>
+        <p><strong>CREATE TABLE</strong>: Este comando é utilizado para criar uma nova tabela no banco de dados. É importante definir o nome da tabela e especificar as colunas e seus respectivos tipos de dados.</p>
+        <pre><code class="language-sql">CREATE TABLE Alunos (
+ID_Alu INT PRIMARY KEY,
+Nome VARCHAR(255),
+Idade INT,
+Curso VARCHAR(255)
+);</code></pre>
+
+        <h3>Modificação de Tabelas</h3>
+        <p><strong>ALTER TABLE</strong>: Utilizado para adicionar, modificar ou excluir colunas em uma tabela existente. Também pode ser usado para adicionar e remover várias outras restrições.</p>
+        <p>Para adicionar uma nova coluna:</p>
+        <pre><code class="language-sql">ALTER TABLE Alunos ADD Email VARCHAR(255);</code></pre>
+        <p>Para modificar o tipo de uma coluna:</p>
+        <pre><code class="language-sql">ALTER TABLE Alunos ALTER COLUMN Idade SMALLINT;</code></pre>
+        <p>Para excluir uma coluna:</p>
+        <pre><code class="language-sql">ALTER TABLE Alunos DROP COLUMN Curso;</code></pre>
+
+        <h3>Eliminação de Tabelas</h3>
+        <p><strong>DROP TABLE</strong>: Este comando é utilizado para eliminar uma tabela e todos os seus dados permanentemente. É uma operação que deve ser usada com cautela.</p>
+        <pre><code class="language-sql">DROP TABLE Alunos;</code></pre>
+    </section>
+
+    <section id="indices">
+        <h2>Índices</h2>
+
+        <p>Os índices são estruturas de dados essenciais que permitem a rápida localização e acesso aos dados armazenados em uma base de dados. Eles funcionam de maneira similar a um índice de um livro, onde em vez de percorrer cada página para encontrar um tema, você consulta o índice para ir diretamente à página desejada. Em bases de dados, os índices ajudam a melhorar significativamente a eficiência das consultas, especialmente em tabelas grandes, reduzindo o tempo necessário para encontrar registros específicos.</p>
+        <p>A utilização de índices é recomendada em tabelas onde as operações de leitura (consultas) são frequentes e precisam ser rápidas. No entanto, é importante notar que eles podem tornar as operações de escrita (inserções, atualizações e exclusões) ligeiramente mais lentas, pois o índice também precisa ser atualizado. Portanto, deve-se balancear a necessidade de rapidez nas consultas com a frequência das operações de escrita ao decidir criar índices.</p>
+        <p>Para criar um índice no Access SQL, pode-se usar a seguinte sintaxe:</p>
+        <pre><code class="language-sql">CREATE INDEX nome_do_indice ON nome_da_tabela (nome_da_coluna);</code></pre>
+        <p>Exemplo:</p>
+        <pre><code class="language-sql">CREATE INDEX idx_nome ON Clientes (Nome);</code></pre>
+        <p>Este exemplo cria um índice chamado <code>idx_nome</code> para a coluna <code>Nome</code> na tabela <code>Clientes</code>, o que acelera as consultas que filtram ou ordenam os dados baseados no nome do cliente.</p>
+
+    </section>
+
+    <section id="views">
+        <h2>Views</h2>
+        <p>Em SQL, uma <strong>view</strong> é uma tabela virtual criada a partir de uma consulta. As views são extremamente úteis por várias razões: podem simplificar consultas complexas, permitindo que se faça referência a elas como se fossem tabelas simples; facilitam a reutilização de consultas SQL; e podem servir como um mecanismo de segurança, limitando a exposição dos dados aos utilizadores, ao mostrar apenas dados específicos através delas.</p>
+    <p>Utilizar views pode ser particularmente vantajoso em cenários onde consultas repetitivas e complexas são comuns, ou quando se deseja abstrair a complexidade subjacente de múltiplas tabelas juntando-as numa única "tabela" virtual. Também são úteis para proporcionar uma camada de abstração que pode ajudar a proteger os dados subjacentes, permitindo que os utilizadores interajam com os dados através da view sem terem acesso direto às tabelas base.</p>
+    <p>Exemplo de criação de uma view:</p>
+    <pre><code class="language-sql">CREATE VIEW VistaDeClientes AS
+SELECT Nome, Morada, Cidade
+FROM Clientes
+WHERE Cidade = 'Porto';</code></pre>
+    <p>Este exemplo cria uma view chamada <strong>VistaDeClientes</strong>, que apresenta o nome, a morada e a cidade dos clientes que vivem no Porto. Após a criação da view, pode-se consultar a mesma como se fosse uma tabela:</p>
+    <pre><code class="language-sql">SELECT * FROM VistaDeClientes;</code></pre>
+</section>
+    <section id="joins">
+        <h2>Joins</h2>
+        <p>Joins são fundamentais em SQL para combinar linhas de duas ou mais tabelas, baseando-se em colunas relacionadas entre elas. Existem vários tipos de joins, cada um com um propósito específico:</p>
+
+        <h3>INNER JOIN</h3>
+        <p>O <strong>INNER JOIN</strong> retorna linhas quando existe pelo menos uma correspondência nas tabelas que estão sendo unidas. Se não houver correspondência, as linhas não serão retornadas.</p>
+        <pre><code class="language-sql">SELECT TabelaA.*, TabelaB.*
+FROM TabelaA
+INNER JOIN TabelaB ON TabelaA.ColunaComum = TabelaB.ColunaComum;</code></pre>
+
+        <h3>LEFT JOIN</h3>
+        <p>O <strong>LEFT JOIN</strong> (ou <strong>LEFT OUTER JOIN</strong>) retorna todas as linhas da tabela da esquerda, juntamente com as linhas correspondentes da tabela da direita. Se não houver correspondência, o resultado é NULL do lado direito.</p>
+        <pre><code class="language-sql">SELECT TabelaA.*, TabelaB.*
+FROM TabelaA
+LEFT JOIN TabelaB ON TabelaA.ColunaComum = TabelaB.ColunaComum;</code></pre>
+
+        <h3>RIGHT JOIN</h3>
+        <p>O <strong>RIGHT JOIN</strong> (ou <strong>RIGHT OUTER JOIN</strong>) retorna todas as linhas da tabela da direita, juntamente com as linhas correspondentes da tabela da esquerda. Se não houver correspondência, o resultado é NULL do lado esquerdo.</p>
+        <pre><code class="language-sql">SELECT TabelaA.*, TabelaB.*
+FROM TabelaA
+RIGHT JOIN TabelaB ON TabelaA.ColunaComum = TabelaB.ColunaComum;</code></pre>
+
+        <h3>FULL JOIN</h3>
+        <p>O <strong>FULL JOIN</strong> (ou <strong>FULL OUTER JOIN</strong>) retorna todas as linhas quando há uma correspondência em uma das tabelas. Isso significa que, se houver linhas na tabela da esquerda que não têm correspondentes na tabela da direita, ou vice-versa, essas linhas também serão mostradas.</p>
+        <pre><code class="language-sql">SELECT TabelaA.*, TabelaB.*
+FROM TabelaA
+FULL JOIN TabelaB ON TabelaA.ColunaComum = TabelaB.ColunaComum;</code></pre>
+
+        <h3>CROSS JOIN</h3>
+        <p>O <strong>CROSS JOIN</strong> retorna o produto cartesiano das linhas das tabelas. Basicamente, cada linha da tabela da esquerda é combinada com todas as linhas da tabela da direita.</p>
+        <pre><code class="language-sql">SELECT TabelaA.*, TabelaB.*
+FROM TabelaA
+CROSS JOIN TabelaB;</code></pre>
+
+        <p>Estes exemplos ilustram como cada tipo de join opera, permitindo a manipulação e combinação de dados de múltiplas tabelas de maneira eficaz.</p>
+       </section>
+
+       <section id="conclusao">
+        <h2>Conclusão</h2>
+        <p>Neste referencial rápido de SQL para Microsoft Access, exploramos desde os comandos básicos até conceitos avançados como Índices, Views e Joins. Cada seção fornece uma visão detalhada das funcionalidades e sintaxes dos comandos, acompanhadas de exemplos práticos para ilustrar seu uso.</p>
+        <p>Os Índices são essenciais para otimizar o desempenho das consultas, enquanto as Views simplificam consultas complexas e protegem dados sensíveis. Os Joins permitem combinar dados de diferentes tabelas, facilitando a análise e manipulação de conjuntos de dados relacionados.</p>
+        <p>Espero que este referencial sirva como uma ferramenta útil para relembrar e consolidar os conceitos de SQL, além de facilitar a aprendizagem e utilização deste poderoso linguagem de consulta em suas atividades de programação e gerenciamento de bancos de dados no Microsoft Access.</p>
+    </section>
+
+
+    <a href="javascript:void(0);" class="goto-top" aria-label="Ir para o topo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </a>
+    <style>
+    .goto-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #3498db; /* Cor de fundo */
+        color: #ffffff; /* Cor do texto */
+        padding: 10px 15px;
+        border-radius: 50%;
+        text-decoration: none;
+        font-size: 24px;
+        transition: all 0.23s ease-in-out;
+        z-index: 1000;
+    }
+   
+    .goto-top:hover {
+        background-color: #2980b9; /* Cor de fundo ao passar o mouse */
+    }
+    </style>
+    <script>
+        function toggleTopButton() {
+            if (window.scrollY > 300) {
+                document.querySelector('.goto-top').style.opacity = 1;
+                document.querySelector('.goto-top').style.bottom = "20px";
+            } else {
+                document.querySelector('.goto-top').style.opacity = 0;
+                document.querySelector('.goto-top').style.bottom = "-60px";
+            }
+        }
+        
+        window.addEventListener('scroll', toggleTopButton);
+        
+        document.querySelector('.goto-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+    </script>
+</main>
+</body>
+</html>
