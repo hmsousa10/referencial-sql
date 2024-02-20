@@ -208,9 +208,9 @@ Anexo Attachment
 
     <section id="tabelas">
         <h2>Tabelas</h2>
-        <p>Trabalhar com tabelas é fundamental em SQL, visto que elas armazenam os dados que manipulamos. Abaixo, explicamos como criar, modificar e eliminar tabelas no Access.</p>
+        <p>Trabalhar com tabelas é fundamental em SQL, visto que elas armazenam os dados que manipulamos. Abaixo, explico como criar, modificar e eliminar tabelas no Access.</p>
         <h3>Criação de Tabelas</h3>
-        <p><strong>CREATE TABLE</strong>: Este comando é utilizado para criar uma nova tabela no banco de dados. É importante definir o nome da tabela e especificar as colunas e seus respectivos tipos de dados.</p>
+        <p><strong>CREATE TABLE</strong>: Este comando é utilizado para criar uma nova tabela na base de dados. É importante definir o nome da tabela e especificar as colunas e seus respectivos tipos de dados.</p>
         <pre><code class="language-sql">CREATE TABLE Alunos (
 ID_Alu INT PRIMARY KEY,
 Nome VARCHAR(255),
@@ -235,7 +235,7 @@ Curso VARCHAR(255)
     <section id="indices">
         <h2>Índices</h2>
 
-        <p>Os índices são estruturas de dados essenciais que permitem a rápida localização e acesso aos dados armazenados em uma base de dados. Eles funcionam de maneira similar a um índice de um livro, onde em vez de percorrer cada página para encontrar um tema, você consulta o índice para ir diretamente à página desejada. Em bases de dados, os índices ajudam a melhorar significativamente a eficiência das consultas, especialmente em tabelas grandes, reduzindo o tempo necessário para encontrar registros específicos.</p>
+        <p>Os índices são estruturas de dados essenciais que permitem a rápida localização e acesso aos dados armazenados em uma base de dados. Eles funcionam de maneira similar a um índice de um livro, onde em vez de percorrer cada página para encontrar um tema, você o índice para ir diretamente à página desejada. Em bases de dados, os índices ajudam a melhorar significativamente a eficiência das consultas, especialmente em tabelas grandes, reduzindo o tempo necessário para encontrar registros específicos.</p>
         <p>A utilização de índices é recomendada em tabelas onde as operações de leitura (consultas) são frequentes e precisam ser rápidas. No entanto, é importante notar que eles podem tornar as operações de escrita (inserções, atualizações e exclusões) ligeiramente mais lentas, pois o índice também precisa ser atualizado. Portanto, deve-se balancear a necessidade de rapidez nas consultas com a frequência das operações de escrita ao decidir criar índices.</p>
         <p>Para criar um índice no Access SQL, pode-se usar a seguinte sintaxe:</p>
         <pre><code class="language-sql">CREATE INDEX nome_do_indice ON nome_da_tabela (nome_da_coluna);</code></pre>
@@ -268,7 +268,7 @@ FROM TabelaA
 INNER JOIN TabelaB ON TabelaA.ColunaComum = TabelaB.ColunaComum;</code></pre>
 
         <h3>LEFT JOIN</h3>
-        <p>O <strong>LEFT JOIN</strong> (ou <strong>LEFT OUTER JOIN</strong>) retorna todas as linhas da tabela da esquerda, juntamente com as linhas correspondentes da tabela da direita. Se não houver correspondência, o resultado é NULL do lado direito.</p>
+        <p>O <strong>LEFTJOIN</strong> (ou <strong>LEFT OUTER JOIN</strong>) retorna todas as linhas da tabela da esquerda, juntamente com as linhas correspondentes da tabela da direita. Se não houver correspondência, o resultado é NULL do lado direito.</p>
         <pre><code class="language-sql">SELECT TabelaA.*, TabelaB.*
 FROM TabelaA
 LEFT JOIN TabelaB ON TabelaA.ColunaComum = TabelaB.ColunaComum;</code></pre>
@@ -296,9 +296,9 @@ CROSS JOIN TabelaB;</code></pre>
 
        <section id="conclusao">
         <h2>Conclusão</h2>
-        <p>Neste referencial rápido de SQL para Microsoft Access, exploramos desde os comandos básicos até conceitos avançados como Índices, Views e Joins. Cada seção fornece uma visão detalhada das funcionalidades e sintaxes dos comandos, acompanhadas de exemplos práticos para ilustrar seu uso.</p>
+        <p>Neste referencial rápido de SQL para Microsoft Access, explorei desde os comandos básicos até conceitos avançados como Índices, Views e Joins. Cada seção fornece uma visão detalhada das funcionalidades e sintaxes dos comandos, acompanhadas de exemplos práticos para ilustrar seu uso.</p>
         <p>Os Índices são essenciais para otimizar o desempenho das consultas, enquanto as Views simplificam consultas complexas e protegem dados sensíveis. Os Joins permitem combinar dados de diferentes tabelas, facilitando a análise e manipulação de conjuntos de dados relacionados.</p>
-        <p>Espero que este referencial sirva como uma ferramenta útil para relembrar e consolidar os conceitos de SQL, além de facilitar a aprendizagem e utilização deste poderoso linguagem de consulta em suas atividades de programação e gerenciamento de bancos de dados no Microsoft Access.</p>
+        <p>Espero que este referencial sirva como uma ferramenta útil para relembrar e consolidar os conceitos de SQL, além de facilitar a aprendizagem e utilização deste poderoso linguagem de consulta em suas atividades de programação e gestão de base de dados no Microsoft Access.</p>
     </section>
 
 
